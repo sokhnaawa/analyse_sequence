@@ -1,3 +1,3 @@
-#define NEC_C  "C"
+#define NEC_C  "T"
 #define NEC_U  "U"
-#define RNA_SEQUENCE_FILE  "/var/www/adn/sequence_rna_%d.txt"
+#define RNA_SEQUENCE_FILE  "/var/www/adn/sequence-rna%d.txt"

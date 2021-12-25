@@ -2,6 +2,9 @@
 #include "sequence.h"
 #include "fileregex.h"
 #include<sys/time.h>
+#include <inttypes.h>
+
+long round(double d);
 
 int sequenceFileType(char *filename)
 {
@@ -98,19 +101,17 @@ int save_sequence(char * data, char * filePath) {
         return -1;
     }
 
-    int i,n;
+    int i,j;
     for(i = 0; i < strlen(data); ++i)
     {
-        if(i%80 != 0 && i >= 0)
-        {
+        if(j < 80) {
+            j++;
+            printf("%d \n", i);
             fprintf(fp, "%c", data[i]);
-        }
-        else
-        {
-            if( i> 0)
-            {
+        } else {
+            j = 0;
+            if( i > 0) {
                 fputs("\n", fp);
-
             }
         }
     }
@@ -159,17 +160,14 @@ char * replaceWord(const char* s, const char* oldW, const char* newW)
     return result;
 }
 
+
 long long timeInMilliseconds() {
-    struct tm xmas = { 0, 0, 0, 24, 11, 116 };
-    time_t rawtime = mktime(&xmas);
-
-    if (rawtime == -1) {
-
-        puts("The mktime() function failed");
-        return 1;
-    }
-
-   return rawtime;
+    struct timeval te;
+    gettimeofday(&te, NULL); // get current time
+    long long milliseconds = te.tv_sec*1000LL + te.tv_usec/1000; // calculate milliseconds
+    // printf("milliseconds: %lld\n", milliseconds);
+    return milliseconds;
 }
+
 
 

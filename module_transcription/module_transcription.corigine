@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     request_file = get_path_from_user(&filePath);
 
     if (request_file == 1) {
-      //  printf("%s", sequence[0:3]);
+        printf("%s", sequence[0:3]);
         extract_sequence(filePath, &sequence);
         while (valid_sequence(sequence) == 0) {
             printf("\nInvalid sequence. Please enter a valid sequence: ");
