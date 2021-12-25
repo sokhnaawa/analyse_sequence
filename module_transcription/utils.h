@@ -91,7 +91,7 @@ void extract_sequence(char * filename, char ** sequence) {
 
 }
 
-int save_sequence(char * data, char * filePath) {
+int save_sequence(char * data, char * filePath, int max_line_length) {
     char *filename = filePath;
     // open the file for writing
 
@@ -101,19 +101,23 @@ int save_sequence(char * data, char * filePath) {
         return -1;
     }
 
-    int i,j;
-    for(i = 0; i < strlen(data); ++i)
+    if(max_line_length > 0)
     {
-        if(j < 80) {
-            j++;
-            printf("%d \n", i);
-            fprintf(fp, "%c", data[i]);
-        } else {
-            j = 0;
-            if( i > 0) {
-                fputs("\n", fp);
+        int i,j;
+        for(i = 0; i < strlen(data); ++i)
+        {
+            if(j < max_line_length) {
+                j++;
+                fprintf(fp, "%c", data[i]);
+            } else {
+                j = 0;
+                if( i > 0) {
+                    fputs("\n", fp);
+                }
             }
         }
+    } else{
+        fputs(data, fp);
     }
 
     // close the file
