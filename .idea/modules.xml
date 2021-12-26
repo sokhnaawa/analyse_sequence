@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/analyse_sequence.iml" filepath="$PROJECT_DIR$/.idea/analyse_sequence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/transcription.iml" filepath="$PROJECT_DIR$/.idea/transcription.iml" />
     </modules>
   </component>
 </project>

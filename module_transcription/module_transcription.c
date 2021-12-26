@@ -3,7 +3,8 @@
 #include <unistd.h>
 #include <time.h>
 #include "constants.h"
-#include "utils.h"
+#include "../lib/utils.h"
+#include "module_transcription.h"
 
 int main(int argc, char *argv[]) {
     char * filePath;
@@ -12,23 +13,21 @@ int main(int argc, char *argv[]) {
     char *sequence;
     char *rna_sequence = NULL;
 
-    request_file = get_path_from_user(&filePath);
+    request_file = get_path_from_user(&filePath, "Please entre a valid codon sequence : ");
 
     if (request_file == 1) {
-      //  printf("%s", sequence[0:3]);
         extract_sequence(filePath, &sequence);
         while (valid_sequence(sequence) == 0) {
-            printf("\nInvalid sequence. Please enter a valid sequence: ");
-            get_path_from_user(&filePath);
+            printf("\nInvalid sequence. Please enter a valid codon sequence: ");
+            get_path_from_user(&filePath, "");
             extract_sequence(filePath, &sequence);
         }
         char tmp[200];
         sprintf(tmp, RNA_SEQUENCE_FILE, timeInMilliseconds());
 
         rna_sequence = replaceWord(sequence, NEC_C, NEC_U);
-        int is_saved = save_sequence(rna_sequence, tmp);
-        if(is_saved == 1)
-        {
+        int is_saved = save_sequence(rna_sequence, tmp, MAX_LINE_LENGTH);
+        if(is_saved == 1) {
             printf("file is saved in %s", tmp);
         }
     }

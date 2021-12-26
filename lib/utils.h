@@ -1,7 +1,6 @@
 #include <string.h>
-#include "sequence.h"
 #include "fileregex.h"
-#include<sys/time.h>
+#include <sys/time.h>
 #include <inttypes.h>
 
 long round(double d);
@@ -35,15 +34,15 @@ int checkIfFileExists(char * filePath)
     return is_valid;
 }
 
-int get_path_from_user(char ** filePath)
+int get_path_from_user(char ** filePath, char * message)
 {
     char *v = (char*) malloc(128 * sizeof(char));
-    printf("Please enter a sequence file Path: ");
+    printf("%s",message);
     scanf("%s", v);
 
     while (checkIfFileExists(v) == 0)
     {
-        printf("Please enter a sequence file Path: ");
+        printf("%s",message);
         scanf("%s",v);
     }
     *filePath = v;
@@ -164,14 +163,61 @@ char * replaceWord(const char* s, const char* oldW, const char* newW)
     return result;
 }
 
-
 long long timeInMilliseconds() {
     struct timeval te;
     gettimeofday(&te, NULL); // get current time
     long long milliseconds = te.tv_sec*1000LL + te.tv_usec/1000; // calculate milliseconds
-    // printf("milliseconds: %lld\n", milliseconds);
     return milliseconds;
 }
 
+typedef int (*cmpfunc)(void *, void *);
 
+int in_array(void *array[], int size, void *lookfor, cmpfunc cmp)
+{
+    int i;
+    for (i = 0; i < size; i++)
+    {
+        if (cmp(lookfor, array[i]) == 0)
+        {
+            return 1;
+        }
+
+    }
+
+    return 0;
+}
+
+void removeAllSpaceAndReturnAline(char **sequence)
+{
+    int count = 0;
+    char * c = *sequence;
+
+    for (int i = 0; c[i]; i++)
+    {
+        if (c[i] != ' ' && c[i] != '\n')
+            c[count++] = c[i]; // here count is
+    }
+    // incremented
+    c[count] = '\0';
+    *sequence =c;
+}
+
+void print_progress(size_t count, size_t max) {
+    const char prefix[] = "Progress: [";
+    const char suffix[] = "]";
+    const size_t prefix_length = sizeof(prefix) - 1;
+    const size_t suffix_length = sizeof(suffix) - 1;
+    char *buffer = calloc(max + prefix_length + suffix_length + 1, 1); // +1 for \0
+    size_t i = 0;
+
+    strcpy(buffer, prefix);
+    for (; i < max; ++i) {
+        buffer[prefix_length + i] = i < count ? '#' : ' ';
+    }
+
+    strcpy(&buffer[prefix_length + i], suffix);
+    printf("\b%c[2K\r%s\n", 27, buffer);
+    fflush(stdout);
+    free(buffer);
+}
 
