@@ -1,14 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <time.h>
-#include "constants.h"
 #include "../lib/utils.h"
+#include "../lib/constants.h"
 #include "module_transcription.h"
 
 int main(int argc, char *argv[]) {
     char * filePath;
-    char * outfilename;
     int request_file = 0;
     char *sequence;
     char *rna_sequence = NULL;

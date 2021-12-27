@@ -31,6 +31,5 @@ int main(int argc, char *argv[]) {
             printf("file is saved in %s", tmp);
         }
     }
-
     return 1;
 }

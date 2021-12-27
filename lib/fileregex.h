@@ -29,7 +29,6 @@ static int match_regex (regex_t * r, const char * to_match)
     regmatch_t m[n_matches];
 
     while (1) {
-        int i = 0;
         int nomatch = regexec (r, p, n_matches, m, 0);
         if (nomatch) {
             return 0;

@@ -1,9 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
 #include <string.h>
 #include "fileregex.h"
 #include <sys/time.h>
 #include <inttypes.h>
-
-long round(double d);
+#include <ctype.h>
 
 int sequenceFileType(char *filename)
 {
@@ -102,17 +105,20 @@ int save_sequence(char * data, char * filePath, int max_line_length) {
 
     if(max_line_length > 0)
     {
-        int i,j;
-        for(i = 0; i < strlen(data); ++i)
+        int i,j =0;
+        for(i = 0; i < strlen(data) && data[i] != '\0'; ++i)
         {
-            if(j < max_line_length) {
+
+            if(j < max_line_length || i == 0) {
                 j++;
+                printf("%c", data[i]);
                 fprintf(fp, "%c", data[i]);
             } else {
-                j = 0;
-                if( i > 0) {
+
+                if( i > 0 && j == max_line_length) {
                     fputs("\n", fp);
                 }
+                j = 0;
             }
         }
     } else{
@@ -163,21 +169,19 @@ char * replaceWord(const char* s, const char* oldW, const char* newW)
     return result;
 }
 
-long long timeInMilliseconds() {
+long int timeInMilliseconds() {
     struct timeval te;
     gettimeofday(&te, NULL); // get current time
     long long milliseconds = te.tv_sec*1000LL + te.tv_usec/1000; // calculate milliseconds
     return milliseconds;
 }
 
-typedef int (*cmpfunc)(void *, void *);
-
-int in_array(void *array[], int size, void *lookfor, cmpfunc cmp)
+int in_array(char *array[], int size, void *lookfor)
 {
     int i;
     for (i = 0; i < size; i++)
     {
-        if (cmp(lookfor, array[i]) == 0)
+        if (strcmp(lookfor, array[i]) == 0)
         {
             return 1;
         }
@@ -187,8 +191,7 @@ int in_array(void *array[], int size, void *lookfor, cmpfunc cmp)
     return 0;
 }
 
-void removeAllSpaceAndReturnAline(char **sequence)
-{
+void removeAllSpaceAndReturnAline(char **sequence) {
     int count = 0;
     char * c = *sequence;
 
@@ -201,23 +204,3 @@ void removeAllSpaceAndReturnAline(char **sequence)
     c[count] = '\0';
     *sequence =c;
 }
-
-void print_progress(size_t count, size_t max) {
-    const char prefix[] = "Progress: [";
-    const char suffix[] = "]";
-    const size_t prefix_length = sizeof(prefix) - 1;
-    const size_t suffix_length = sizeof(suffix) - 1;
-    char *buffer = calloc(max + prefix_length + suffix_length + 1, 1); // +1 for \0
-    size_t i = 0;
-
-    strcpy(buffer, prefix);
-    for (; i < max; ++i) {
-        buffer[prefix_length + i] = i < count ? '#' : ' ';
-    }
-
-    strcpy(&buffer[prefix_length + i], suffix);
-    printf("\b%c[2K\r%s\n", 27, buffer);
-    fflush(stdout);
-    free(buffer);
-}
-

@@ -3,4 +3,4 @@ project(transcription C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(transcription module_transcription.c)
+add_executable(transcription ../recherche_sequence/recherche_sequence.c)

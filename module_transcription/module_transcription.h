@@ -1,4 +1,3 @@
-#include <ctype.h>
 
 int valid_sequence(char *sequence) {
 
