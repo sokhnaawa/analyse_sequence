@@ -12,6 +12,11 @@ int main(int argc, char *argv[]) {
 
     if (request_file == 1)
     {
+        while (valid_dna_sequence(dna_sequence) == 0) {
+            printf("\nInvalid DNA sequence. Please enter a valid DNA sequence: ");
+            get_path_from_user(&filePath, "");
+            extract_sequence(filePath, &dna_sequence);
+        }
         removeAllSpaceAndReturnAline(&dna_sequence);
         getAllCodonSequencesFromDNA(dna_sequence, &maxSequence);
         if(strlen(maxSequence) > 0)

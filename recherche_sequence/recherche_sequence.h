@@ -1,3 +1,10 @@
+/**
+ *  function find codons stop
+ * @param D
+ * @param seqLength
+ * @param startIndice
+ * @return
+ */
 int findCodStop(char *D, int seqLength, int startIndice) {
     int ind = -1;
     int finded = 0;
@@ -32,6 +39,13 @@ int findCodStop(char *D, int seqLength, int startIndice) {
     return ind;
 }
 
+/**
+ * find codon start
+ * @param D
+ * @param startIndex
+ * @param endIndex
+ * @return
+ */
 int findCodStart(char *D, int startIndex, int endIndex)
 {
     int indCodStart = -1;
@@ -49,10 +63,15 @@ int findCodStart(char *D, int startIndex, int endIndex)
     return indCodStart;
 }
 
-char * getCodonSequence(char *D, int start, int end)
-{
-    if(start > -1 && end > -1 )
-    {
+/**
+ * get condon sequence
+ * @param D
+ * @param start
+ * @param end
+ * @return
+ */
+char * getCodonSequence(char *D, int start, int end) {
+    if(start > -1 && end > -1 ) {
         int n = end - start;
         int i;
         char *str= malloc(n * sizeof(char*));
@@ -65,12 +84,38 @@ char * getCodonSequence(char *D, int start, int end)
             strcat(str, codon);
         }
 
-       // printf("start is %d and end is %d ===> condon sequence is ===> %s \n", start, end, str);
         return str;
     }
     return "";
 }
 
+/**
+ *
+ * @param sequence
+ * @return
+ */
+int valid_dna_sequence(char *sequence) {
+    int is_valid = 1;
+    int length = strlen(sequence);
+
+    for (int i = 0; sequence[i] != '\0'; ++i) {
+        char c = toupper(sequence[i]);
+
+        if (c != 'A' && c != 'C' && c != 'G' && c != 'T') {
+            is_valid = 0;
+            break;
+        }
+    }
+
+    return is_valid;
+}
+
+/**
+ *
+ * @param dna_sequence
+ * @param maxSequence
+ * @return
+ */
 char * getAllCodonSequencesFromDNA(char * dna_sequence, char ** maxSequence)
 {
     int starIndex1 = 0;
