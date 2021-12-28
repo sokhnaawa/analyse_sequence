@@ -1,10 +1,9 @@
-
 int valid_sequence(char *sequence) {
 
     int is_valid = 1;
     int length = strlen(sequence);
     if (length % 3 != 0) {
-        printf("probleme modulo (a personnalisé)  %d", length);
+        printf("Sequence invalid, length is %d, please enter a valid sequence\n", length);
         return 0;
     }
 
@@ -24,7 +23,7 @@ int valid_sequence(char *sequence) {
             ) {
         return 1;
     } else {
-        printf("Codon code est Ko");
+        printf("Codon code is invalid, please enter a sequence starting with ATG \n");
         return 0;
     }
 
