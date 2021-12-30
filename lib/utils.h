@@ -176,7 +176,7 @@ long int timeInMilliseconds() {
     return milliseconds;
 }
 
-int in_array(char *array[], int size, void *lookfor)
+int in_array(char *array[], int size, char * lookfor)
 {
     int i;
     for (i = 0; i < size; i++)
