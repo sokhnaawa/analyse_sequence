@@ -19,19 +19,19 @@ compiler tous les modules:
 Compiler par module
 ---------------------
 
-A. Module transcription
+***A. Module transcription***
    + make transcription
 
-B. Recherche sequence
+***B. Recherche sequence***
    + make recherche
 
-C. Traduction
+***C. Traduction***
    + make translation
 
-D. calcule score
+***D. calcule score***
    + make calculescore
 
-E. score semilaire
+***E. score semilaire***
    + make scoresemilaire
 
 
