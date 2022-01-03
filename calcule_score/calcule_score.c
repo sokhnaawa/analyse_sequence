@@ -1,26 +1,20 @@
 #include "../lib/utils.h"
 #include "../lib/constants.h"
-#define KRED  "\x1B[31m"
 int main() {
     char * filePath1;
     char * filePath2;
-
-    int request_file1 = 0;
-    int request_file2 = 0;
     char *sequence1;
     char *sequence2;
 
-    char *rna_sequence = NULL;
+    get_path_from_user(&filePath1, "Please entre a valid codon sequence 1: ");
+    get_path_from_user(&filePath2, "Please entre a valid codon sequence 2: ");
 
-    request_file1 = get_path_from_user(&filePath1, "Please entre a valid codon sequence 1: ");
-
-    request_file2 = get_path_from_user(&filePath2, "Please entre a valid codon sequence 2: ");
     extract_sequence(filePath1, &sequence1);
     extract_sequence(filePath2, &sequence2);
 
     if(strlen(sequence1) != strlen(sequence2)) {
         printf("\033[0;31m");
-        printf("KOKO todo");
+        printf("The sequences are not the same size");
         printf("\033[0m");
         return 0;
     }
