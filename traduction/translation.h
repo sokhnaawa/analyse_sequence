@@ -1,4 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+#include <string.h>
+#include <inttypes.h>
 #include <ctype.h>
+#include "../lib/utils.h"
 #include "proteins.h"
 
 int valid_rna_sequence(char *sequence) {

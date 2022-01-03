@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdio.h>
+#include <ctype.h>
 int valid_sequence(char *sequence) {
 
     int is_valid = 1;

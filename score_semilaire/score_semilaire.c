@@ -5,17 +5,20 @@
 int main(int argc, char *argv[]) {
     char *filePath1;
     char *filePath2;
-
-    int request_file1 = 0;
-    int request_file2 = 0;
     char *sequence1;
     char *sequence2;
 
-    request_file1 = get_path_from_user(&filePath1, "Please entre a valid codon sequence 1: ");
-    request_file2 = get_path_from_user(&filePath2, "Please entre a valid codon sequence 2: ");
+    get_path_from_user(&filePath1, "Please entre a valid codon sequence 1: ");
+    get_path_from_user(&filePath2, "Please entre a valid codon sequence 2: ");
     extract_sequence(filePath1, &sequence1);
     extract_sequence(filePath2, &sequence2);
 
+    if(strlen(sequence1) != strlen(sequence2)) {
+        printf("\033[0;31m");
+        printf("The sequences are not the same size");
+        printf("\033[0m");
+        return 0;
+    }
     char score[strlen(sequence1)];
     printf("\n 0:hydrophiles , 1:hydrophobes , -:différents\r");
 
@@ -24,7 +27,7 @@ int main(int argc, char *argv[]) {
         sprintf(codon1, "%.*s", 1, sequence1 + i);
         char codon2[2];
         sprintf(codon2, "%.*s", 1, sequence2 + i);
-        if (codon1 != "" && codon2 != "") {
+        if (strcmp(codon1, "") != 0  && strcmp(codon2, "") != 0 ) {
             if (in_array(Ap, 9, codon1) && in_array(Ap, 9, codon2)) {
                 score[i] = '1';
             } else if (in_array(Po, 9, codon1) && in_array(Po, 10, codon2)) {

@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include <time.h>
 #include "../lib/constants.h"
-#include "../lib/utils.h"
 #include "translation.h"
 
 int main(int argc, char *argv[]) {

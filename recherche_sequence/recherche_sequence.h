@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+#include <string.h>
+#include <inttypes.h>
+#include <ctype.h>
 /**
  *  function find codons stop
  * @param D
@@ -80,7 +87,6 @@ char * getCodonSequence(char *D, int start, int end) {
         for(i = start; i < end; i++) {
             char codon[1];
             sprintf(codon, "%.*s", 1, D+i);
-            char s = D[i];
             strcat(str, codon);
         }
 
@@ -96,7 +102,6 @@ char * getCodonSequence(char *D, int start, int end) {
  */
 int valid_dna_sequence(char *sequence) {
     int is_valid = 1;
-    int length = strlen(sequence);
 
     for (int i = 0; sequence[i] != '\0'; ++i) {
         char c = toupper(sequence[i]);
@@ -116,7 +121,7 @@ int valid_dna_sequence(char *sequence) {
  * @param maxSequence
  * @return
  */
-char * getAllCodonSequencesFromDNA(char * dna_sequence, char ** maxSequence)
+void getAllCodonSequencesFromDNA(char * dna_sequence, char ** maxSequence)
 {
     int starIndex1 = 0;
     int dna_length = strlen(dna_sequence);
