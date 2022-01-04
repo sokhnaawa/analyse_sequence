@@ -13,7 +13,7 @@ int main() {
     extract_sequence(filePath2, &sequence2);
 
     if(strlen(sequence1) != strlen(sequence2)) {
-        printf("\033[0;31m");
+        printf("\033[31m");
         printf("The sequences are not the same size");
         printf("\033[0m");
         return 0;

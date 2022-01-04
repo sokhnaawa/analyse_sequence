@@ -1,12 +1,16 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
+#ifndef COLORS
+#include "../lib/colors.h"
+#endif
+
 int valid_sequence(char *sequence) {
 
     int is_valid = 1;
     int length = strlen(sequence);
     if (length % 3 != 0) {
-        printf("Sequence invalid, length is %d, please enter a valid sequence\n", length);
+        printf("%s Sequence invalid, length is %d, please enter a valid sequence %s\n", RED, length, RESET);
         return 0;
     }
 

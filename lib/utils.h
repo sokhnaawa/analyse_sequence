@@ -7,16 +7,7 @@
 #include <sys/time.h>
 #include <inttypes.h>
 #include <ctype.h>
-
-// Pour colorer l'affichage dans le terminal:
-#define RED   "\x1B[31m"
-#define GRN   "\x1B[32m"
-#define YEL   "\x1B[33m"
-#define BLU   "\x1B[34m"
-#define MAG   "\x1B[35m"
-#define CYN   "\x1B[36m"
-#define WHT   "\x1B[37m"
-#define RESET "\x1B[0m"
+#include "colors.h"
 
 int sequenceFileType(char *filename)
 {
@@ -32,7 +23,7 @@ int checkIfFileExists(char * filePath)
 {
     int is_valid;
     if( access( filePath, F_OK ) == 0 ) {
-        printf("Ok file %s exists \n", filePath);
+        printf("%sOk file %s exists %s\n", MAG, filePath, RESET);
         is_valid = 1;
 
         int is_valid_file_type = sequenceFileType(filePath);

@@ -3,6 +3,9 @@ CFLAGS=-Wall
 
 build_all: transcription recherche translation scoresemilaire calculescore
 
+test:
+	 ./transcription
+
 transcription: module_transcription.o
 	$(CC)  module_transcription.o -o transcription
 
